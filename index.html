@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+    <script src="./JS/Vue.js"></script>
+    <link rel="stylesheet" href="./CSS/Style.css">
+</head>
+<body>
+    <header>
+        <h1>Lista de Tareas</h1>
+    </header>
+    <div id="app">
+        <div class="input-container">
+            <input type="text" v-model="nuevaTarea" placeholder="Agregar nueva tarea">
+            <button @click="agregarTarea">Añadir Tarea</button>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress" :style="{ width: porcentajeCompletado + '%' }"></div>
+            </div>
+            <p>{{ porcentajeCompletado.toFixed(1) }}% Completado</p>
+        </div>
+
+        <ul class="task-list">
+            <li v-for="(tarea, index) in tareas" :key="index" class="task-item">
+                <input type="checkbox" v-model="tarea.completada">
+                <span :class="{ completada: tarea.completada }">{{ tarea.nombre }}</span>
+                <button class="delete-btn" @click="eliminarTarea(index)">X</button>
+            </li>
+        </ul>        
+    </div>
+    <script src="./JS/Script.js"></script>
+</body>
+</html>
